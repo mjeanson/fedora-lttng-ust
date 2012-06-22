@@ -1,6 +1,6 @@
 Name:           lttng-ust
 Version:        2.0.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -18,7 +18,7 @@ tracepoints using LTTng.
 Summary:        LTTng Userspace Tracer library headers and development files
 Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       userspace-rcu-devel
+Requires:       userspace-rcu-devel systemtap-sdt-devel
 
 %description -n %{name}-devel
 This library provides support for developing programs using 
@@ -64,6 +64,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Fri Jun 22 2012 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.4-2
+- Add dependency on systemtap-sdt-devel for devel package
+
 * Tue Jun 19 2012 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.4-1
 - New upstream release
 - Updates from review comments
