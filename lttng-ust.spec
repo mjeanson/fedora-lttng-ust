@@ -1,6 +1,6 @@
 Name:           lttng-ust
 Version:        2.0.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -64,6 +64,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Fri Jun 22 2012 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.4-2
 - Add dependency on systemtap-sdt-devel for devel package
 
