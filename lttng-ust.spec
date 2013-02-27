@@ -1,11 +1,16 @@
 Name:           lttng-ust
 Version:        2.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
 URL:            http://lttng.org/ust/
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
+
+#Patch applied in upstream stable-2.1 branch (commit d9619bcf98bae)
+Patch0:         lttng-ust-2.1.1-Use-tp-rcu-link-test-in-provider.patch
+#Patch applied in upstream stable-2.1 branch (commit 3ac4bd8ab3091)
+Patch1:         lttng-ust-2.1.1-remove-dep-urcu-bp.patch
 
 BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
 BuildRequires:  userspace-rcu-devel >= 0.6.6
@@ -26,6 +31,8 @@ LTTng userspace tracing
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 #Reinitialize libtool with the fedora version to remove Rpath
@@ -64,6 +71,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Wed Feb 27 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.1.1-2
+- Remove dependency of probes on urcu-bp
+
 * Tue Feb 26 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.1.1-1
 - New upstream release
 

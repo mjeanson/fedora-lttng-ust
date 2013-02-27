@@ -1,0 +1,28 @@
+From 3ac4bd8ab309129f091ac180fb68e49cfc23dc8b Mon Sep 17 00:00:00 2001
+From: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+Date: Tue, 26 Feb 2013 15:25:18 -0500
+Subject: [PATCH 2/2] Use tp rcu link test in provider
+
+Ensure we never trigger a null pointer exception.
+
+Signed-off-by: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+---
+ include/lttng/ust-tracepoint-event.h |    2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/include/lttng/ust-tracepoint-event.h b/include/lttng/ust-tracepoint-event.h
+index b3fb2d4..e46cc1a 100644
+--- a/include/lttng/ust-tracepoint-event.h
++++ b/include/lttng/ust-tracepoint-event.h
+@@ -502,6 +502,8 @@ void __event_probe__##_provider##___##_name(_TP_ARGS_DATA_PROTO(_args))	      \
+ 		return;							      \
+ 	if (caa_unlikely(!CMM_ACCESS_ONCE(__event->enabled)))		      \
+ 		return;							      \
++	if (caa_unlikely(!TP_RCU_LINK_TEST()))				      \
++		return;							      \
+ 	if (caa_unlikely(!cds_list_empty(&__event->bytecode_runtime_head))) { \
+ 		struct lttng_bytecode_runtime *bc_runtime;		      \
+ 		int __filter_record = __event->has_enablers_without_bytecode; \
+-- 
+1.7.10.4
+
