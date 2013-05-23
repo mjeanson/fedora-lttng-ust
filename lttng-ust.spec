@@ -1,6 +1,6 @@
 Name:           lttng-ust
 Version:        2.1.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -28,6 +28,11 @@ LTTng userspace tracing
 %setup -q
 
 %build
+%ifarch s390 s390x
+# workaround rhbz#837572 (ICE in gcc)
+%global optflags %(echo %{optflags} | sed 's/-O2/-O1/')
+%endif
+
 #Reinitialize libtool with the fedora version to remove Rpath
 libtoolize -cvfi
 %configure --docdir=%{_docdir}/%{name} --disable-static --with-sdt
@@ -64,6 +69,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Thu May 23 2013 Dan Horák <dan[at]danny.cz> - 2.1.2-2
+- add build workaround for s390(x)
+
 * Fri May 17 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.1.2-1
 - New upstream bugfix release
 - Remove patches applied upstream
