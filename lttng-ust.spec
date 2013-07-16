@@ -1,6 +1,6 @@
 Name:           lttng-ust
-Version:        2.1.2
-Release:        2%{?dist}
+Version:        2.2.1
+Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -8,7 +8,7 @@ URL:            http://lttng.org/ust/
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
 
 BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
-BuildRequires:  userspace-rcu-devel >= 0.6.6
+BuildRequires:  userspace-rcu-devel >= 0.7.2
 
 %description
 This library may be used by user space applications to generate 
@@ -53,6 +53,7 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %files
 %{_libdir}/*.so.*
 %{_mandir}/man3/lttng-ust.3.gz
+%{_mandir}/man3/lttng-ust-cyg-profile.3.gz
 %dir %{_docdir}/%{name}
 %{_docdir}/%{name}/ChangeLog
 %{_docdir}/%{name}/README
@@ -69,6 +70,10 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Tue Jul 16 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.2.1-1
+- New upstream release
+- Bump URCU dependency
+
 * Thu May 23 2013 Dan Horák <dan[at]danny.cz> - 2.1.2-2
 - add build workaround for s390(x)
 
