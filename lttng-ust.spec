@@ -1,5 +1,5 @@
 Name:           lttng-ust
-Version:        2.0.5
+Version:        2.0.8
 Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
@@ -64,6 +64,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Mon Jul 22 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.8-1
+- New upstream bugfix release
+
 * Tue Oct 23 2012 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.5-1
 - New upstream release
 
