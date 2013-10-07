@@ -1,6 +1,6 @@
 Name:           lttng-ust
-Version:        2.1.4
-Release:        2%{?dist}
+Version:        2.3.0
+Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -8,7 +8,7 @@ URL:            http://lttng.org/ust/
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
 
 BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
-BuildRequires:  userspace-rcu-devel >= 0.6.6
+BuildRequires:  userspace-rcu-devel >= 0.7.2
 
 %description
 This library may be used by user space applications to generate 
@@ -28,6 +28,11 @@ LTTng userspace tracing
 %setup -q
 
 %build
+%ifarch s390 s390x
+# workaround rhbz#837572 (ICE in gcc)
+%global optflags %(echo %{optflags} | sed 's/-O2/-O1/')
+%endif
+
 #Reinitialize libtool with the fedora version to remove Rpath
 libtoolize -cvfi
 %configure --docdir=%{_docdir}/%{name} --disable-static --with-sdt
@@ -48,6 +53,7 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %files
 %{_libdir}/*.so.*
 %{_mandir}/man3/lttng-ust.3.gz
+%{_mandir}/man3/lttng-ust-cyg-profile.3.gz
 %dir %{_docdir}/%{name}
 %{_docdir}/%{name}/ChangeLog
 %{_docdir}/%{name}/README
@@ -64,9 +70,16 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Fri Sep 20 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.3.0-1
+- New upstream release (include snapshop feature)
+- Bump URCU dependency
+
 * Mon Jul 22 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.1.4-1
 - New upstream bugfix release
 - Remove backported patches
+
+* Thu May 23 2013 Dan Horák <dan[at]danny.cz> - 2.1.2-2
+- add build workaround for s390(x)
 
 * Wed Feb 27 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.1.1-2
 - Remove dependency of probes on urcu-bp
