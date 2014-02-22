@@ -1,6 +1,6 @@
 Name:           lttng-ust
 Version:        2.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -70,6 +70,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Sat Feb 22 2014 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.3.0-2
+- Rebuilt for URCU Soname change
+
 * Fri Sep 20 2013 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.3.0-1
 - New upstream release (include snapshop feature)
 
