@@ -1,6 +1,6 @@
 Name:           lttng-ust
-Version:        2.3.0
-Release:        2%{?dist}
+Version:        2.4.0
+Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -54,9 +54,11 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_libdir}/*.so.*
 %{_mandir}/man3/lttng-ust.3.gz
 %{_mandir}/man3/lttng-ust-cyg-profile.3.gz
+%{_mandir}/man3/lttng-ust-dl.3.gz
 %dir %{_docdir}/%{name}
 %{_docdir}/%{name}/ChangeLog
 %{_docdir}/%{name}/README
+%{_docdir}/%{name}/java-util-logging.txt
 
 
 %files -n %{name}-devel
@@ -70,6 +72,10 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Sat Mar 1 2014 Suchakra Sharma <suchakra@fedoraproject.org> - 2.4.0-1
+- New upstream release
+- Add new files (man and doc)
+
 * Sat Feb 22 2014 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.3.0-2
 - Rebuilt for URCU Soname change
 
