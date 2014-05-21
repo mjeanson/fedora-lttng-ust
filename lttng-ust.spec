@@ -1,5 +1,5 @@
 Name:           lttng-ust
-Version:        2.4.0
+Version:        2.4.1
 Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
@@ -72,6 +72,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Tue May 20 2014 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.4.1-1
+- New upstream bugfix release
+
 * Sat Mar 1 2014 Suchakra Sharma <suchakra@fedoraproject.org> - 2.4.0-1
 - New upstream release
 - Add new files (man and doc)
