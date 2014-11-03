@@ -1,10 +1,10 @@
 Name:           lttng-ust
-Version:        2.4.1
-Release:        3%{?dist}
+Version:        2.5.1
+Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
-URL:            http://lttng.org/ust/
+URL:            http://lttng.org
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
 
 BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
@@ -72,6 +72,10 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Sun Nov 02 2014 Suchakra Sharma <suchakra@fedoraproject.org> - 2.5.1-1
+- New upstream release
+- Update URL
+
 * Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.4.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
