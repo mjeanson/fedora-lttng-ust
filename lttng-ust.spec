@@ -72,7 +72,7 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
-* Sun Nov 03 2014 Suchakra Sharma <suchakra@fedoraproject.org> - 2.5.1-1
+* Mon Nov 03 2014 Suchakra Sharma <suchakra@fedoraproject.org> - 2.5.1-1
 - New upstream release
 - Update URL
 
