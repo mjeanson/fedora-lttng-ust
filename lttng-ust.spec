@@ -1,14 +1,16 @@
 Name:           lttng-ust
 Version:        2.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
 URL:            http://lttng.org
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
+Patch0:         lttng-ust-aarch64-aligned-access.patch
 
 BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
 BuildRequires:  userspace-rcu-devel >= 0.7.2
+BuildRequires:  libtool autoconf automake
 
 %description
 This library may be used by user space applications to generate 
@@ -26,6 +28,7 @@ LTTng userspace tracing
 
 %prep
 %setup -q
+%patch0 -p1 -b .aarch64
 
 %build
 %ifarch s390 s390x
@@ -35,6 +38,7 @@ LTTng userspace tracing
 
 #Reinitialize libtool with the fedora version to remove Rpath
 libtoolize -cvfi
+autoreconf -vif
 %configure --docdir=%{_docdir}/%{name} --disable-static --with-sdt
 # --with-java-jdk
 # Java support was disabled in lttng-ust's stable-2.0 branch upstream in
@@ -72,6 +76,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Tue Dec  9 2014 Peter Robinson <pbrobinson@fedoraproject.org> 2.5.1-2
+- Add patch to fix aarch64 support
+
 * Mon Nov 03 2014 Suchakra Sharma <suchakra@fedoraproject.org> - 2.5.1-1
 - New upstream release
 - Update URL
