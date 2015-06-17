@@ -1,6 +1,6 @@
 Name:           lttng-ust
 Version:        2.5.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
@@ -76,6 +76,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Tue Dec  9 2014 Peter Robinson <pbrobinson@fedoraproject.org> 2.5.1-2
 - Add patch to fix aarch64 support
 
