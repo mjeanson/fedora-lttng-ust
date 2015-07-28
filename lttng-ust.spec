@@ -1,15 +1,14 @@
 Name:           lttng-ust
-Version:        2.5.1
-Release:        3%{?dist}
+Version:        2.6.2
+Release:        1%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
 URL:            http://lttng.org
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
-Patch0:         lttng-ust-aarch64-aligned-access.patch
 
 BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
-BuildRequires:  userspace-rcu-devel >= 0.7.2
+BuildRequires:  userspace-rcu-devel >= 0.8.0
 BuildRequires:  libtool autoconf automake
 
 %description
@@ -20,7 +19,7 @@ tracepoints using LTTng.
 Summary:        LTTng Userspace Tracer library headers and development files
 Group:          Development/Libraries
 Requires:       %{name}%{?_isa} = %{version}-%{release}
-Requires:       userspace-rcu-devel systemtap-sdt-devel
+Requires:       userspace-rcu-devel
 
 %description -n %{name}-devel
 This library provides support for developing programs using 
@@ -28,7 +27,6 @@ LTTng userspace tracing
 
 %prep
 %setup -q
-%patch0 -p1 -b .aarch64
 
 %build
 %ifarch s390 s390x
@@ -39,7 +37,7 @@ LTTng userspace tracing
 #Reinitialize libtool with the fedora version to remove Rpath
 libtoolize -cvfi
 autoreconf -vif
-%configure --docdir=%{_docdir}/%{name} --disable-static --with-sdt
+%configure --docdir=%{_docdir}/%{name} --disable-static
 # --with-java-jdk
 # Java support was disabled in lttng-ust's stable-2.0 branch upstream in
 # http://git.lttng.org/?p=lttng-ust.git;a=commit;h=655a0d112540df3001f9823cd3b331b8254eb2aa
@@ -61,8 +59,8 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_mandir}/man3/lttng-ust-dl.3.gz
 %dir %{_docdir}/%{name}
 %{_docdir}/%{name}/ChangeLog
-%{_docdir}/%{name}/README
-%{_docdir}/%{name}/java-util-logging.txt
+%{_docdir}/%{name}/README.md
+%{_docdir}/%{name}/java-agent.txt
 
 
 %files -n %{name}-devel
@@ -76,6 +74,11 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Thu Jul 23 2015 Michael Jeanson <mjeanson@gmail.com> - 2.6.2-1
+- New upstream release
+- Drop SystemTap SDT support
+- Remove patches applied upstream
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.5.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
@@ -140,6 +143,7 @@ rm -vf %{buildroot}%{_libdir}/*.la
 * Tue Jun 19 2012 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.4-1
 - New upstream release
 - Updates from review comments
+
 * Thu Jun 14 2012 Yannick Brosseau <yannick.brosseau@gmail.com> - 2.0.3-1
 - New package, inspired by the one from OpenSuse
 
