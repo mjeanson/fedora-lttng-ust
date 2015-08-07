@@ -1,13 +1,14 @@
 Name:           lttng-ust
 Version:        2.6.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        LGPLv2 and GPLv2 and MIT
 Group:          Development/Libraries
 Summary:        LTTng Userspace Tracer library
 URL:            http://lttng.org
 Source0:        http://lttng.org/files/lttng-ust/%{name}-%{version}.tar.bz2
 
-BuildRequires:  libuuid-devel texinfo systemtap-sdt-devel libtool
+BuildRequires:  python
+BuildRequires:  libuuid-devel texinfo libtool
 BuildRequires:  userspace-rcu-devel >= 0.8.0
 BuildRequires:  libtool autoconf automake
 
@@ -74,6 +75,9 @@ rm -vf %{buildroot}%{_libdir}/*.la
 %{_docdir}/%{name}/examples/*
 
 %changelog
+* Thu Aug 6 2015 Suchakra Sharma <suchakra@fedoraproject.org> - 2.6.2-2
+- Remove remaining BR for SystemTap SDT and add python as a BR
+
 * Thu Jul 23 2015 Michael Jeanson <mjeanson@gmail.com> - 2.6.2-1
 - New upstream release
 - Drop SystemTap SDT support
